@@ -8,10 +8,10 @@
 
 //global variables
 uint8_t curStr[NUM_DIG-1];
-//char complStr[] = "Samuel_Kostur_92610";
-uint8_t *complStr;
-uint8_t complStrLen = 19;
+uint8_t complStr[MAX_STR_LENGTH];
+uint8_t complStrLen = 19; //length without null char
 uint8_t curPos = 0;
+int8_t decSepPos = -5; //default value meaning there is no decimal point in string
 
 // 0b dABC DEFG
 const uint8_t segVal_ASCII[75]= {
@@ -39,6 +39,7 @@ const uint32_t dig_Pins[] = {dig_1_Pin,dig_2_Pin,dig_3_Pin,dig_4_Pin};
 
 //functions to handle multiplexing of the currently displaying alphanum char
 void updateAlphanumChar(uint8_t seg_Val);
+void updateDecimalPoint(uint8_t curActDig);
 void setDigit(uint8_t pos);
 void resetAllSegments();
 void resetAllDigits();
@@ -54,6 +55,7 @@ void DISPLAY_displayCurStr(){
 	resetAllDigits();
 
 	updateAlphanumChar( segVal_ASCII[ toupper(curStr[curActDig]) - '0'] );
+	updateDecimalPoint(curActDig);
 	setDigit(curActDig);
 	curActDig++;
 	curActDig %= 4;
@@ -64,8 +66,13 @@ void updateAlphanumChar(uint8_t segmentValues){
 	for(int i = 0; i<(NUM_SEG-1); i++){
 		if(segmentValues & (0x01<<i)) LL_GPIO_ResetOutputPin((GPIO_TypeDef*)seg_Ports[i], (uint32_t)seg_Pins[i]);
 	}
-	}
+}
 
+void updateDecimalPoint(uint8_t curActDig){
+	if(decSepPos == (curPos + curActDig)){
+		LL_GPIO_ResetOutputPin((GPIO_TypeDef*)seg_DP_Port, (uint32_t)seg_DP_Pin);
+	}
+}
 //Turns required digit ON
 void setDigit(uint8_t pos){
 	LL_GPIO_SetOutputPin((GPIO_TypeDef*)dig_Ports[pos], (uint32_t)dig_Pins[pos]);
@@ -117,8 +124,25 @@ void setCurStr(uint8_t curPos){
 
 //Function to change the complete string which is continuously being displayed on the display
 void DISPLAY_setCompStr(uint8_t *newComplStr,uint8_t size){
-	complStr = newComplStr;
-	complStrLen = size;
+	//determine position of the decimal point and parse string
+	decSepPos = -5;
+
+	for(int i = 0; i<size; i++){
+		if(newComplStr[i] == '.'){
+			decSepPos = i - 1; //-1 because i want it to be displayed on digit(its DP_segment) together with the previous char
+		}
+
+		if(decSepPos == -5){
+			complStr[i] = newComplStr[i];
+		}
+		else{
+			complStr[i] = newComplStr[i+1];
+		}
+	}
+
+
+	complStrLen = decSepPos == 5 ? size : (size - 1);  //(size-1) because '.' was extracted
+	complStr[complStrLen] = '\0';
 }
 
 void DISPLAY_resetCurPos(){

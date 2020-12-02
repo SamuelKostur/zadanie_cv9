@@ -28,6 +28,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "stm32f3xx_hal.h"
 #include "stm32f3xx_ll_rcc.h"
 #include "stm32f3xx_ll_bus.h"
 #include "stm32f3xx_ll_system.h"
@@ -38,10 +39,6 @@ extern "C" {
 #include "stm32f3xx_ll_dma.h"
 #include "stm32f3xx_ll_tim.h"
 #include "stm32f3xx_ll_gpio.h"
-
-#if defined(USE_FULL_ASSERT)
-#include "stm32_assert.h"
-#endif /* USE_FULL_ASSERT */
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -88,6 +85,9 @@ void Error_Handler(void);
 #define digit_3_GPIO_Port GPIOA
 #define digit_time_Pin LL_GPIO_PIN_7
 #define digit_time_GPIO_Port GPIOA
+#define tlacidlo_Pin LL_GPIO_PIN_0
+#define tlacidlo_GPIO_Port GPIOB
+#define tlacidlo_EXTI_IRQn EXTI0_IRQn
 #define segment_DP_Pin LL_GPIO_PIN_1
 #define segment_DP_GPIO_Port GPIOB
 #define segment_C_Pin LL_GPIO_PIN_8
@@ -98,20 +98,11 @@ void Error_Handler(void);
 #define segment_G_GPIO_Port GPIOB
 #define segment_D_Pin LL_GPIO_PIN_5
 #define segment_D_GPIO_Port GPIOB
-#ifndef NVIC_PRIORITYGROUP_0
-#define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
-                                                                 4 bits for subpriority */
-#define NVIC_PRIORITYGROUP_1         ((uint32_t)0x00000006) /*!< 1 bit  for pre-emption priority,
-                                                                 3 bits for subpriority */
-#define NVIC_PRIORITYGROUP_2         ((uint32_t)0x00000005) /*!< 2 bits for pre-emption priority,
-                                                                 2 bits for subpriority */
-#define NVIC_PRIORITYGROUP_3         ((uint32_t)0x00000004) /*!< 3 bits for pre-emption priority,
-                                                                 1 bit  for subpriority */
-#define NVIC_PRIORITYGROUP_4         ((uint32_t)0x00000003) /*!< 4 bits for pre-emption priority,
-                                                                 0 bit  for subpriority */
-#endif
 /* USER CODE BEGIN Private defines */
 #define NUM_SENSOR_DATA 5
+
+void MAIN_buttonShiftDataID();
+void MAIN_updateSensorData();
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

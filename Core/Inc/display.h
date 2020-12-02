@@ -16,7 +16,7 @@
 #define NUM_SEG 8 //number of segments per digit
 #define LEFT_TO_RIGHT 1
 #define RIGHT_TO_LEFT 0
-
+#define MAX_STR_LENGTH 14
 #define seg_A_Pin LL_GPIO_PIN_1
 #define seg_B_Pin LL_GPIO_PIN_0
 #define seg_C_Pin LL_GPIO_PIN_8

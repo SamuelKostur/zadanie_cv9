@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "i2c.h"
 #include "tim.h"
 #include "gpio.h"
 
@@ -72,13 +73,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
-
-  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
-
-  /* System interrupt init*/
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -95,6 +90,7 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -104,7 +100,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  writeDisplay();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -138,8 +134,14 @@ void SystemClock_Config(void)
   {
 
   }
-  LL_Init1msTick(8000000);
   LL_SetSystemCoreClock(8000000);
+
+   /* Update the time base */
+  if (HAL_InitTick (TICK_INT_PRIORITY) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  LL_RCC_SetI2CClockSource(LL_RCC_I2C1_CLKSOURCE_HSI);
 }
 
 /* USER CODE BEGIN 4 */
@@ -162,6 +164,16 @@ void SystemClock_Config(void)
 				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"ALT_%06.1f",sensorData[dataID]));
 				break;
 		}
+	}
+
+	void MAIN_buttonShiftDataID(){
+		dataID++;
+		dataID %= 5;
+		DISPLAY_resetCurPos();
+	}
+
+	void MAIN_updateSensorData(){
+		//TO DO
 	}
 /* USER CODE END 4 */
 
