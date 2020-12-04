@@ -1,3 +1,4 @@
+core_cm4.h:1657:22:__NVIC_SetPriorityGrouping	24	static
 stm32f3xx_ll_rcc.h:1086:22:LL_RCC_HSI_Enable	4	static
 stm32f3xx_ll_rcc.h:1106:26:LL_RCC_HSI_IsReady	4	static
 stm32f3xx_ll_rcc.h:1132:22:LL_RCC_HSI_SetCalibTrimming	16	static
@@ -7,11 +8,13 @@ stm32f3xx_ll_rcc.h:1323:22:LL_RCC_SetAHBPrescaler	16	static
 stm32f3xx_ll_rcc.h:1339:22:LL_RCC_SetAPB1Prescaler	16	static
 stm32f3xx_ll_rcc.h:1355:22:LL_RCC_SetAPB2Prescaler	16	static
 stm32f3xx_ll_rcc.h:1533:22:LL_RCC_SetI2CClockSource	16	static
+stm32f3xx_ll_bus.h:537:22:LL_APB1_GRP1_EnableClock	24	static
+stm32f3xx_ll_bus.h:851:22:LL_APB2_GRP1_EnableClock	24	static
 stm32f3xx_ll_system.h:1618:22:LL_FLASH_SetLatency	16	static
 stm32f3xx_ll_system.h:1631:26:LL_FLASH_GetLatency	4	static
-main.c:67:5:main	8	static
-main.c:113:6:SystemClock_Config	8	static
-main.c:148:7:writeDisplay	16	static
-main.c:169:7:MAIN_buttonShiftDataID	8	static
-main.c:175:7:MAIN_updateSensorData	4	static
-main.c:184:6:Error_Handler	4	static
+main.c:71:5:main	8	static
+main.c:125:6:SystemClock_Config	8	static
+main.c:155:7:writeDisplay	16	static
+main.c:176:7:MAIN_buttonShiftDataID	8	static
+main.c:182:7:MAIN_updateSensorData	4	static
+main.c:191:6:Error_Handler	4	static

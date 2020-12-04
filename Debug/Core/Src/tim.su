@@ -11,6 +11,6 @@ stm32f3xx_ll_tim.h:3351:22:LL_TIM_SetTriggerOutput	16	static
 stm32f3xx_ll_tim.h:3451:22:LL_TIM_DisableMasterSlaveMode	16	static
 stm32f3xx_ll_tim.h:4349:22:LL_TIM_EnableIT_UPDATE	16	static
 tim.c:29:6:MX_TIM2_Init	64	static
-tim.c:61:6:MX_TIM3_Init	64	static
-tim.c:94:6:add_TIM2_Init	8	static
-tim.c:99:6:add_TIM3_Init	8	static
+tim.c:60:6:MX_TIM3_Init	64	static
+tim.c:92:6:add_TIM2_Init	8	static
+tim.c:97:6:add_TIM3_Init	8	static
