@@ -1,0 +1,5 @@
+lps25hb.c:12:9:lps25hb_read_byte	32	static
+lps25hb.c:19:6:lps25hb_write_byte	16	static
+lps25hb.c:25:6:lps25hb_readArray	24	static
+lps25hb.c:31:7:lps25hb_get_bar	16	static
+lps25hb.c:42:9:lps25hb_init	16	static

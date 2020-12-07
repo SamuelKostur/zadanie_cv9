@@ -1,4 +1,4 @@
-Core/Src/hts221.o: ../Core/Src/hts221.c ../Core/Inc/hts221.h \
+Core/Src/lis3mdltr.o: ../Core/Src/lis3mdltr.c ../Core/Inc/lis3mdltr.h \
  ../Core/Inc/main.h \
  ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303x8.h \
@@ -20,7 +20,7 @@ Core/Src/hts221.o: ../Core/Src/hts221.c ../Core/Inc/hts221.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_ll_gpio.h \
  ../Core/Inc/display.h ../Core/Inc/i2c.h
 
-../Core/Inc/hts221.h:
+../Core/Inc/lis3mdltr.h:
 
 ../Core/Inc/main.h:
 

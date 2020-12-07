@@ -27,6 +27,10 @@
 /* USER CODE BEGIN Includes */
 
 #include "lsm6ds0.h"
+#include "hts221.h"
+#include "lps25hb.h"
+#include "lis3mdltr.h"
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,17 +50,20 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-float sensorData[NUM_SENSOR_DATA];
+float data[NUM_DATA]; // {azimuth, temperature, humidity, pressure, altitude}
+float minDataVal[] = {-99.9, -99.9, 0, 0, -9999.9};
+float maxDataVal[] = {99.9, 99.9, 99, 9999.99, 9999.9};
 uint8_t dataID = 0;
-uint8_t val = 0;
-uint8_t temp = 0;
-float mag[3], acc[3];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void writeDisplay();
+float calcAzimuth(float x, float y);
+float calcAltitude(float pressure, float temperature);
+float adjustData(float value, float minValue, float maxValue);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -102,7 +109,10 @@ int main(void)
   MX_TIM3_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  val = lsm6ds0_init();
+  //lsm6ds0_init();
+  hts221_init();
+  lps25hb_init();
+  lis3mdl_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,7 +122,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  lsm6ds0_get_acc(acc, (acc+1), (acc+2));
+	  MAIN_updateData();
 	  LL_mDelay(50);
   }
   /* USER CODE END 3 */
@@ -156,19 +166,19 @@ void SystemClock_Config(void)
 		static uint8_t compStr[13];
 		switch (dataID){
 			case 0:
-				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"MAG_%04.1f",sensorData[dataID]));
+				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"MAG_%04.1f",data[dataID]));
 				break;
 			case 1:
-				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"TEMP_%04.1f",sensorData[dataID]));
+				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"TEMP_%04.1f",data[dataID]));
 				break;
 			case 2:
-				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"HUM_%02.0f",sensorData[dataID]));
+				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"HUM_%02.0f",data[dataID]));
 				break;
 			case 3:
-				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"BAR_%07.2f",sensorData[dataID]));
+				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"BAR_%07.2f",data[dataID]));
 				break;
 			case 4:
-				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"ALT_%06.1f",sensorData[dataID]));
+				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"ALT_%06.1f",data[dataID]));
 				break;
 		}
 	}
@@ -179,8 +189,42 @@ void SystemClock_Config(void)
 		DISPLAY_resetCurPos();
 	}
 
-	void MAIN_updateSensorData(){
-		//TO DO
+	void MAIN_updateData(){
+		//static float acc[3];
+		//lsm6ds0_get_acc(acc, (acc+1), (acc+2));
+		static float mag[3];
+		lis3mdl_get_mag(mag,(mag+1), (mag+2));
+		data[0] = calcAzimuth(mag[0], mag[1]);
+
+		data[1] = hts221_get_temp();
+		data[2] = hts221_get_humidity();
+		data[3] = lps25hb_get_bar();
+		data[4] = calcAltitude(data[1], data[3]);
+
+		for (int i = 0; i < NUM_DATA; i++){
+			data[i] = adjustData(data[i],minDataVal[i],maxDataVal[i]);
+		}
+	}
+
+	float adjustData(float value, float minValue, float maxValue){
+		if(value < minValue){
+			value = minValue;
+		}
+
+		if(value > maxValue){
+			value = maxValue;
+		}
+
+		return value;
+	}
+
+	float calcAzimuth(float x, float y){
+		return (float) (atan2((double)y,(double)x)) * 180.0f/3.1415f;
+	}
+
+	float calcAltitude(float pressure, float temperature){
+		const float P0 = 1013.25;
+		return (float) (pow((double)(P0/pressure), (double)(1.0f/5.257f)) -1.0f) * (temperature + 273.15f)/0.0065f;
 	}
 /* USER CODE END 4 */
 

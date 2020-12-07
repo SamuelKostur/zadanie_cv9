@@ -94,7 +94,7 @@ uint8_t lsm6ds0_init(void)
 
 	//acc device init
 
-	uint8_t ctrl1 = 8 << 4; // +-2g res
+	uint8_t ctrl1 = 1 << 7; // +-2g res
 	lsm6ds0_write_byte(LSM6DS0_ADDRESS_CTRL1, ctrl1);
 
 	return status;

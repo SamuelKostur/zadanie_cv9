@@ -1,0 +1,6 @@
+lis3mdltr.c:18:9:lis3mdl_read_byte	32	static
+lis3mdltr.c:24:6:lis3mdl_write_byte	16	static
+lis3mdltr.c:29:6:lis3mdl_readArray	24	static
+lis3mdltr.c:34:8:lis3mdl_get_temp	16	static
+lis3mdltr.c:42:6:lis3mdl_get_mag	48	static
+lis3mdltr.c:69:9:lis3mdl_init	16	static

@@ -227,8 +227,8 @@ void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
 	if(LL_TIM_IsActiveFlag_UPDATE(TIM2)){
+		MAIN_updateData();
 		DISPLAY_displayCurStr();
-		MAIN_updateSensorData();
 		LL_TIM_ClearFlag_UPDATE(TIM2);
 	}
   /* USER CODE END TIM2_IRQn 0 */

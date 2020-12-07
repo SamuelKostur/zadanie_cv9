@@ -116,10 +116,10 @@ void Error_Handler(void);
                                                                  0 bit  for subpriority */
 #endif
 /* USER CODE BEGIN Private defines */
-#define NUM_SENSOR_DATA 5
+#define NUM_DATA 5
 
 void MAIN_buttonShiftDataID();
-void MAIN_updateSensorData();
+void MAIN_updateData();
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
