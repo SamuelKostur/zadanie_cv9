@@ -198,7 +198,7 @@ void SystemClock_Config(void)
 
 		data[1] = hts221_get_temp();
 		data[2] = hts221_get_humidity();
-		data[3] = lps25hb_get_bar();
+		data[3] = lps25hb_get_press();
 		data[4] = calcAltitude(data[1], data[3]);
 
 		for (int i = 0; i < NUM_DATA; i++){
@@ -214,7 +214,6 @@ void SystemClock_Config(void)
 		if(value > maxValue){
 			value = maxValue;
 		}
-
 		return value;
 	}
 

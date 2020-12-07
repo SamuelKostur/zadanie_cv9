@@ -1061,7 +1061,7 @@ Discarded input sections
                 0x0000000000000000      0x13c Core/Src/main.o
  .text.Error_Handler
                 0x0000000000000000        0xe Core/Src/main.o
- .bss.compStr.11044
+ .bss.compStr.11036
                 0x0000000000000000        0xd Core/Src/main.o
  .debug_macro   0x0000000000000000      0xa90 Core/Src/main.o
  .debug_macro   0x0000000000000000       0x2e Core/Src/main.o
@@ -1121,8 +1121,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x20 Core/Src/main.o
  .debug_macro   0x0000000000000000       0xd6 Core/Src/main.o
  .debug_macro   0x0000000000000000       0x3a Core/Src/main.o
- .debug_macro   0x0000000000000000       0x3a Core/Src/main.o
- .debug_macro   0x0000000000000000       0x3a Core/Src/main.o
+ .debug_macro   0x0000000000000000       0x28 Core/Src/main.o
+ .debug_macro   0x0000000000000000       0x28 Core/Src/main.o
  .debug_macro   0x0000000000000000      0x3ad Core/Src/main.o
  .group         0x0000000000000000        0xc Core/Src/stm32f3xx_it.o
  .group         0x0000000000000000        0xc Core/Src/stm32f3xx_it.o
@@ -2794,9 +2794,8 @@ LOAD c:/st/stm32cubeide_1.4.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x00000000080012c0       0x38 Core/Src/hts221.o
                 0x00000000080012c0                hts221_get_humidity
  .text.hts221_init
-                0x00000000080012f8       0x42 Core/Src/hts221.o
+                0x00000000080012f8       0x44 Core/Src/hts221.o
                 0x00000000080012f8                hts221_init
- *fill*         0x000000000800133a        0x2 
  .text.__NVIC_GetPriorityGrouping
                 0x000000000800133c       0x1c Core/Src/i2c.o
  .text.__NVIC_EnableIRQ
@@ -2875,59 +2874,58 @@ LOAD c:/st/stm32cubeide_1.4.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .text.lps25hb_readArray
                 0x0000000008001bd8       0x30 Core/Src/lps25hb.o
                 0x0000000008001bd8                lps25hb_readArray
- .text.lps25hb_get_bar
+ .text.lps25hb_get_press
                 0x0000000008001c08       0x4c Core/Src/lps25hb.o
-                0x0000000008001c08                lps25hb_get_bar
+                0x0000000008001c08                lps25hb_get_press
  .text.lps25hb_init
-                0x0000000008001c54       0x64 Core/Src/lps25hb.o
+                0x0000000008001c54       0x68 Core/Src/lps25hb.o
                 0x0000000008001c54                lps25hb_init
  .text.__NVIC_SetPriorityGrouping
-                0x0000000008001cb8       0x48 Core/Src/main.o
+                0x0000000008001cbc       0x48 Core/Src/main.o
  .text.LL_RCC_HSI_Enable
-                0x0000000008001d00       0x20 Core/Src/main.o
+                0x0000000008001d04       0x20 Core/Src/main.o
  .text.LL_RCC_HSI_IsReady
-                0x0000000008001d20       0x24 Core/Src/main.o
+                0x0000000008001d24       0x24 Core/Src/main.o
  .text.LL_RCC_HSI_SetCalibTrimming
-                0x0000000008001d44       0x2c Core/Src/main.o
+                0x0000000008001d48       0x2c Core/Src/main.o
  .text.LL_RCC_SetSysClkSource
-                0x0000000008001d70       0x28 Core/Src/main.o
+                0x0000000008001d74       0x28 Core/Src/main.o
  .text.LL_RCC_GetSysClkSource
-                0x0000000008001d98       0x1c Core/Src/main.o
+                0x0000000008001d9c       0x1c Core/Src/main.o
  .text.LL_RCC_SetAHBPrescaler
-                0x0000000008001db4       0x28 Core/Src/main.o
+                0x0000000008001db8       0x28 Core/Src/main.o
  .text.LL_RCC_SetAPB1Prescaler
-                0x0000000008001ddc       0x28 Core/Src/main.o
+                0x0000000008001de0       0x28 Core/Src/main.o
  .text.LL_RCC_SetAPB2Prescaler
-                0x0000000008001e04       0x28 Core/Src/main.o
+                0x0000000008001e08       0x28 Core/Src/main.o
  .text.LL_RCC_SetI2CClockSource
-                0x0000000008001e2c       0x30 Core/Src/main.o
+                0x0000000008001e30       0x30 Core/Src/main.o
  .text.LL_APB1_GRP1_EnableClock
-                0x0000000008001e5c       0x30 Core/Src/main.o
+                0x0000000008001e60       0x30 Core/Src/main.o
  .text.LL_APB2_GRP1_EnableClock
-                0x0000000008001e8c       0x30 Core/Src/main.o
+                0x0000000008001e90       0x30 Core/Src/main.o
  .text.LL_FLASH_SetLatency
-                0x0000000008001ebc       0x28 Core/Src/main.o
+                0x0000000008001ec0       0x28 Core/Src/main.o
  .text.LL_FLASH_GetLatency
-                0x0000000008001ee4       0x1c Core/Src/main.o
- .text.main     0x0000000008001f00       0x44 Core/Src/main.o
-                0x0000000008001f00                main
+                0x0000000008001ee8       0x1c Core/Src/main.o
+ .text.main     0x0000000008001f04       0x44 Core/Src/main.o
+                0x0000000008001f04                main
  .text.SystemClock_Config
-                0x0000000008001f44       0x6c Core/Src/main.o
-                0x0000000008001f44                SystemClock_Config
+                0x0000000008001f48       0x6c Core/Src/main.o
+                0x0000000008001f48                SystemClock_Config
  .text.MAIN_buttonShiftDataID
-                0x0000000008001fb0       0x3c Core/Src/main.o
-                0x0000000008001fb0                MAIN_buttonShiftDataID
+                0x0000000008001fb4       0x3c Core/Src/main.o
+                0x0000000008001fb4                MAIN_buttonShiftDataID
  .text.MAIN_updateData
-                0x0000000008001fec       0xf8 Core/Src/main.o
-                0x0000000008001fec                MAIN_updateData
+                0x0000000008001ff0       0xf8 Core/Src/main.o
+                0x0000000008001ff0                MAIN_updateData
  .text.adjustData
-                0x00000000080020e4       0x52 Core/Src/main.o
-                0x00000000080020e4                adjustData
- *fill*         0x0000000008002136        0x2 
+                0x00000000080020e8       0x52 Core/Src/main.o
+                0x00000000080020e8                adjustData
+ *fill*         0x000000000800213a        0x2 
  .text.calcAzimuth
-                0x0000000008002138       0x64 Core/Src/main.o
-                0x0000000008002138                calcAzimuth
- *fill*         0x000000000800219c        0x4 
+                0x000000000800213c       0x64 Core/Src/main.o
+                0x000000000800213c                calcAzimuth
  .text.calcAltitude
                 0x00000000080021a0       0x98 Core/Src/main.o
                 0x00000000080021a0                calcAltitude
@@ -3501,7 +3499,7 @@ LOAD c:/st/stm32cubeide_1.4.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .bss.dataID    0x0000000020000258        0x1 Core/Src/main.o
                 0x0000000020000258                dataID
  *fill*         0x0000000020000259        0x3 
- .bss.mag.11055
+ .bss.mag.11047
                 0x000000002000025c        0xc Core/Src/main.o
  .bss.__sbrk_heap_end
                 0x0000000020000268        0x4 Core/Src/sysmem.o
@@ -3763,7 +3761,7 @@ OUTPUT(zadanie_cv8.elf elf32-littlearm)
  .debug_ranges  0x00000000000005d8      0x138 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
  .debug_ranges  0x0000000000000710       0xe0 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_utils.o
 
-.debug_macro    0x0000000000000000    0x1f0c5
+.debug_macro    0x0000000000000000    0x1f0a1
  .debug_macro   0x0000000000000000      0x31f Core/Src/display.o
  .debug_macro   0x000000000000031f      0xa60 Core/Src/display.o
  .debug_macro   0x0000000000000d7f       0x22 Core/Src/display.o
@@ -3851,81 +3849,81 @@ OUTPUT(zadanie_cv8.elf elf32-littlearm)
  .debug_macro   0x000000000001bbdd       0x20 Core/Src/gpio.o
  .debug_macro   0x000000000001bbfd       0xd6 Core/Src/gpio.o
  .debug_macro   0x000000000001bcd3      0x2e5 Core/Src/hts221.o
- .debug_macro   0x000000000001bfb8       0x3a Core/Src/hts221.o
- .debug_macro   0x000000000001bff2      0x2dc Core/Src/i2c.o
- .debug_macro   0x000000000001c2ce      0x2eb Core/Src/lis3mdltr.o
- .debug_macro   0x000000000001c5b9      0x3ad Core/Src/lis3mdltr.o
- .debug_macro   0x000000000001c966      0x2e5 Core/Src/lps25hb.o
- .debug_macro   0x000000000001cc4b       0x3a Core/Src/lps25hb.o
- .debug_macro   0x000000000001cc85      0x32f Core/Src/main.o
- .debug_macro   0x000000000001cfb4      0x1e1 Core/Src/main.o
- .debug_macro   0x000000000001d195      0x2f3 Core/Src/stm32f3xx_it.o
- .debug_macro   0x000000000001d488       0xee Core/Src/sysmem.o
- .debug_macro   0x000000000001d576      0x23b Core/Src/sysmem.o
- .debug_macro   0x000000000001d7b1      0x19e Core/Src/system_stm32f3xx.o
- .debug_macro   0x000000000001d94f       0x55 Core/Src/system_stm32f3xx.o
- .debug_macro   0x000000000001d9a4      0x2dc Core/Src/tim.o
- .debug_macro   0x000000000001dc80      0x1cb Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
- .debug_macro   0x000000000001de4b       0xf8 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
- .debug_macro   0x000000000001df43      0x1e0 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_gpio.o
- .debug_macro   0x000000000001e123       0xff Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
- .debug_macro   0x000000000001e222      0x240 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
- .debug_macro   0x000000000001e462      0x24a Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
- .debug_macro   0x000000000001e6ac      0x7fd Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
- .debug_macro   0x000000000001eea9      0x21c Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_utils.o
+ .debug_macro   0x000000000001bfb8       0x28 Core/Src/hts221.o
+ .debug_macro   0x000000000001bfe0      0x2dc Core/Src/i2c.o
+ .debug_macro   0x000000000001c2bc      0x2eb Core/Src/lis3mdltr.o
+ .debug_macro   0x000000000001c5a7      0x3ad Core/Src/lis3mdltr.o
+ .debug_macro   0x000000000001c954      0x2e5 Core/Src/lps25hb.o
+ .debug_macro   0x000000000001cc39       0x28 Core/Src/lps25hb.o
+ .debug_macro   0x000000000001cc61      0x32f Core/Src/main.o
+ .debug_macro   0x000000000001cf90      0x1e1 Core/Src/main.o
+ .debug_macro   0x000000000001d171      0x2f3 Core/Src/stm32f3xx_it.o
+ .debug_macro   0x000000000001d464       0xee Core/Src/sysmem.o
+ .debug_macro   0x000000000001d552      0x23b Core/Src/sysmem.o
+ .debug_macro   0x000000000001d78d      0x19e Core/Src/system_stm32f3xx.o
+ .debug_macro   0x000000000001d92b       0x55 Core/Src/system_stm32f3xx.o
+ .debug_macro   0x000000000001d980      0x2dc Core/Src/tim.o
+ .debug_macro   0x000000000001dc5c      0x1cb Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
+ .debug_macro   0x000000000001de27       0xf8 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
+ .debug_macro   0x000000000001df1f      0x1e0 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_gpio.o
+ .debug_macro   0x000000000001e0ff       0xff Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
+ .debug_macro   0x000000000001e1fe      0x240 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
+ .debug_macro   0x000000000001e43e      0x24a Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
+ .debug_macro   0x000000000001e688      0x7fd Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
+ .debug_macro   0x000000000001ee85      0x21c Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_utils.o
 
-.debug_line     0x0000000000000000     0x8999
+.debug_line     0x0000000000000000     0x899d
  .debug_line    0x0000000000000000      0xa30 Core/Src/display.o
  .debug_line    0x0000000000000a30      0x8ed Core/Src/gpio.o
- .debug_line    0x000000000000131d      0x81b Core/Src/hts221.o
- .debug_line    0x0000000000001b38      0xa36 Core/Src/i2c.o
- .debug_line    0x000000000000256e      0x836 Core/Src/lis3mdltr.o
- .debug_line    0x0000000000002da4      0x810 Core/Src/lps25hb.o
- .debug_line    0x00000000000035b4      0xa34 Core/Src/main.o
- .debug_line    0x0000000000003fe8      0x924 Core/Src/stm32f3xx_it.o
- .debug_line    0x000000000000490c      0x4c7 Core/Src/sysmem.o
- .debug_line    0x0000000000004dd3      0x696 Core/Src/system_stm32f3xx.o
- .debug_line    0x0000000000005469      0x98e Core/Src/tim.o
- .debug_line    0x0000000000005df7       0x88 Core/Startup/startup_stm32f303k8tx.o
- .debug_line    0x0000000000005e7f      0x83b Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
- .debug_line    0x00000000000066ba      0x85a Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_gpio.o
- .debug_line    0x0000000000006f14      0x5c5 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
- .debug_line    0x00000000000074d9      0xb52 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
- .debug_line    0x000000000000802b      0x96e Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_utils.o
+ .debug_line    0x000000000000131d      0x81e Core/Src/hts221.o
+ .debug_line    0x0000000000001b3b      0xa36 Core/Src/i2c.o
+ .debug_line    0x0000000000002571      0x836 Core/Src/lis3mdltr.o
+ .debug_line    0x0000000000002da7      0x811 Core/Src/lps25hb.o
+ .debug_line    0x00000000000035b8      0xa34 Core/Src/main.o
+ .debug_line    0x0000000000003fec      0x924 Core/Src/stm32f3xx_it.o
+ .debug_line    0x0000000000004910      0x4c7 Core/Src/sysmem.o
+ .debug_line    0x0000000000004dd7      0x696 Core/Src/system_stm32f3xx.o
+ .debug_line    0x000000000000546d      0x98e Core/Src/tim.o
+ .debug_line    0x0000000000005dfb       0x88 Core/Startup/startup_stm32f303k8tx.o
+ .debug_line    0x0000000000005e83      0x83b Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
+ .debug_line    0x00000000000066be      0x85a Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_gpio.o
+ .debug_line    0x0000000000006f18      0x5c5 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
+ .debug_line    0x00000000000074dd      0xb52 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
+ .debug_line    0x000000000000802f      0x96e Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_utils.o
 
-.debug_str      0x0000000000000000    0xa7bf1
+.debug_str      0x0000000000000000    0xa7b5f
  .debug_str     0x0000000000000000    0x95d79 Core/Src/display.o
                                       0x963a9 (size before relaxing)
  .debug_str     0x0000000000095d79     0xba99 Core/Src/gpio.o
                                       0x7620a (size before relaxing)
- .debug_str     0x00000000000a1812      0x1a1 Core/Src/hts221.o
-                                      0x75ccf (size before relaxing)
- .debug_str     0x00000000000a19b3      0x2d5 Core/Src/i2c.o
+ .debug_str     0x00000000000a1812      0x156 Core/Src/hts221.o
+                                      0x75c84 (size before relaxing)
+ .debug_str     0x00000000000a1968      0x2d5 Core/Src/i2c.o
                                       0x763b4 (size before relaxing)
- .debug_str     0x00000000000a1c88     0x126b Core/Src/lis3mdltr.o
+ .debug_str     0x00000000000a1c3d     0x126b Core/Src/lis3mdltr.o
                                       0x76def (size before relaxing)
- .debug_str     0x00000000000a2ef3      0x170 Core/Src/lps25hb.o
-                                      0x75cde (size before relaxing)
- .debug_str     0x00000000000a3063      0xb87 Core/Src/main.o
-                                      0x77b89 (size before relaxing)
- .debug_str     0x00000000000a3bea      0x1b2 Core/Src/stm32f3xx_it.o
+ .debug_str     0x00000000000a2ea8      0x129 Core/Src/lps25hb.o
+                                      0x75c97 (size before relaxing)
+ .debug_str     0x00000000000a2fd1      0xb87 Core/Src/main.o
+                                      0x77af5 (size before relaxing)
+ .debug_str     0x00000000000a3b58      0x1b2 Core/Src/stm32f3xx_it.o
                                       0x75d43 (size before relaxing)
- .debug_str     0x00000000000a3d9c      0x4e9 Core/Src/sysmem.o
+ .debug_str     0x00000000000a3d0a      0x4e9 Core/Src/sysmem.o
                                        0x5f71 (size before relaxing)
- .debug_str     0x00000000000a4285       0x5f Core/Src/system_stm32f3xx.o
+ .debug_str     0x00000000000a41f3       0x5f Core/Src/system_stm32f3xx.o
                                       0x91040 (size before relaxing)
- .debug_str     0x00000000000a42e4      0x1d1 Core/Src/tim.o
+ .debug_str     0x00000000000a4252      0x1d1 Core/Src/tim.o
                                       0x7627b (size before relaxing)
- .debug_str     0x00000000000a44b5       0x69 Core/Startup/startup_stm32f303k8tx.o
- .debug_str     0x00000000000a451e      0x444 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
+ .debug_str     0x00000000000a4423       0x69 Core/Startup/startup_stm32f303k8tx.o
+ .debug_str     0x00000000000a448c      0x444 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_exti.o
                                       0x91956 (size before relaxing)
- .debug_str     0x00000000000a4962      0x600 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_gpio.o
+ .debug_str     0x00000000000a48d0      0x600 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_gpio.o
                                       0x92385 (size before relaxing)
- .debug_str     0x00000000000a4f62      0x3ed Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
+ .debug_str     0x00000000000a4ed0      0x3ed Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_i2c.o
                                       0x66bd7 (size before relaxing)
- .debug_str     0x00000000000a534f     0x1b87 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
+ .debug_str     0x00000000000a52bd     0x1b87 Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_tim.o
                                       0x972d5 (size before relaxing)
- .debug_str     0x00000000000a6ed6      0xd1b Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_utils.o
+ .debug_str     0x00000000000a6e44      0xd1b Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_ll_utils.o
                                       0x96057 (size before relaxing)
 
 .comment        0x0000000000000000       0x7b

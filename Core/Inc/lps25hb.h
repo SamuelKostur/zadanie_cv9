@@ -20,14 +20,9 @@
 
 #define 	LPS25HB_ADDRESS_CTRL1					0x20
 
-#define 	LPS25HB_ADDRESS_ACCX					0x28
-#define 	LPS25HB_ADDRESS_ACCY					0x2A
-#define 	LPS25HB_ADDRESS_ACCZ					0x2C
-
-#define 	LPS25HB_ADDRESS_BAR				0x28
+#define 	LPS25HB_ADDRESS_PRESS_XL				0x28
 
 uint8_t lps25hb_init(void);
-void lps25hb_get_acc(float* x, float * y, float * z);
 uint8_t lps25hb_read_byte(uint8_t reg_addr);
 void lps25hb_write_byte(uint8_t reg_addr, uint8_t value);
-float lps25hb_get_bar();
+float lps25hb_get_press();
