@@ -84,21 +84,21 @@ void Error_Handler(void);
 #define segment_F_GPIO_Port GPIOA
 #define digit_2_Pin LL_GPIO_PIN_4
 #define digit_2_GPIO_Port GPIOA
-#define digit_1_Pin LL_GPIO_PIN_5
-#define digit_1_GPIO_Port GPIOA
-#define digit_3_Pin LL_GPIO_PIN_6
-#define digit_3_GPIO_Port GPIOA
 #define digit_time_Pin LL_GPIO_PIN_7
 #define digit_time_GPIO_Port GPIOA
-#define tlacidlo_Pin LL_GPIO_PIN_0
-#define tlacidlo_GPIO_Port GPIOB
-#define tlacidlo_EXTI_IRQn EXTI0_IRQn
+#define digit_1_Pin LL_GPIO_PIN_0
+#define digit_1_GPIO_Port GPIOB
 #define segment_DP_Pin LL_GPIO_PIN_1
 #define segment_DP_GPIO_Port GPIOB
 #define segment_C_Pin LL_GPIO_PIN_8
 #define segment_C_GPIO_Port GPIOA
 #define segment_E_Pin LL_GPIO_PIN_11
 #define segment_E_GPIO_Port GPIOA
+#define digit_3_Pin LL_GPIO_PIN_12
+#define digit_3_GPIO_Port GPIOA
+#define tlacidlo_Pin LL_GPIO_PIN_3
+#define tlacidlo_GPIO_Port GPIOB
+#define tlacidlo_EXTI_IRQn EXTI3_IRQn
 #define segment_G_Pin LL_GPIO_PIN_4
 #define segment_G_GPIO_Port GPIOB
 #define segment_D_Pin LL_GPIO_PIN_5
@@ -118,8 +118,18 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 #define NUM_DATA 5
 
+// defines for "checkButtonState"
+#define		TRIGGER_RISE					0
+#define		TRIGGER_FALL					1
+
+#define		BUTTON_EXTI_TRIGGER				TRIGGER_FALL
+
+#define		BUTTON_EXTI_SAMPLES_WINDOW		50
+#define		BUTTON_EXTI_SAMPLES_REQUIRED	40
+
 void MAIN_buttonShiftDataID();
 void MAIN_updateData();
+uint8_t MAIN_checkButtonState(GPIO_TypeDef* PORT, uint8_t PIN, uint8_t edge, uint8_t samples_window, uint8_t samples_required);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

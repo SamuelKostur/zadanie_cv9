@@ -23,6 +23,8 @@
 /* USER CODE BEGIN 0 */
 uint8_t *aReceiveBuffer_read , end_of_read_flag = 0;
 volatile uint8_t ubReceiveIndex = 0;
+
+void add_I2C_Init(void);
 /* USER CODE END 0 */
 
 /* I2C1 init function */
@@ -68,7 +70,7 @@ void MX_I2C1_Init(void)
   LL_I2C_Init(I2C1, &I2C_InitStruct);
   LL_I2C_SetOwnAddress2(I2C1, 0, LL_I2C_OWNADDRESS2_NOMASK);
 
-  LL_I2C_Enable(I2C1);
+  add_I2C_Init();
 }
 
 /* USER CODE BEGIN 1 */
@@ -145,6 +147,10 @@ void I2C_eventCallback(void)
 		(ubReceiveIndex > 19) ? ubReceiveIndex = 0 : ubReceiveIndex;
 		end_of_read_flag = 0;
 	}
+}
+
+void add_I2C_Init(void){
+	LL_I2C_Enable(I2C1);
 }
 /* USER CODE END 1 */
 

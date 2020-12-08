@@ -20,7 +20,17 @@
 #define 	HTS221_ADDRESS_CTRL1					0x20
 
 #define 	HTS221_ADDRESS_TEMP_L					0x2A
+#define		HTS221_ADDRESS_T0_degC_x8				0x32
+#define		HTS221_ADDRESS_T1_degC_x8				0x33
+#define		HTS221_ADDRESS_MSB_T0_T1_degC_x8		0x35
+#define		HTS221_ADDRESS_T0_OUT_L					0x3C
+#define		HTS221_ADDRESS_T1_OUT_L					0x3E
+
 #define 	HTS221_ADDRESS_HUM_L					0x28
+#define		HTS221_ADDRESS_H0_rH_x2					0x30
+#define		HTS221_ADDRESS_H1_rH_x2					0x31
+#define		HTS221_ADDRESS_H0_OUT_L					0x36
+#define		HTS221_ADDRESS_H1_OUT_L					0x3A
 
 uint8_t hts221_init(void);
 uint8_t hts221_read_byte(uint8_t reg_addr);

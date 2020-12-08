@@ -19,7 +19,8 @@ stm32f3xx_ll_i2c.h:2174:25:LL_I2C_ReceiveData8	16	static
 stm32f3xx_ll_i2c.h:2186:22:LL_I2C_TransmitData8	16	static
 stm32f3xx_ll_bus.h:287:22:LL_AHB1_GRP1_EnableClock	24	static
 stm32f3xx_ll_bus.h:537:22:LL_APB1_GRP1_EnableClock	24	static
-i2c.c:29:6:MX_I2C1_Init	64	static
-i2c.c:75:6:i2c_master_write	32	static
-i2c.c:97:10:i2c_master_read	24	static
-i2c.c:138:6:I2C_eventCallback	16	static
+i2c.c:31:6:MX_I2C1_Init	64	static
+i2c.c:77:6:i2c_master_write	32	static
+i2c.c:99:10:i2c_master_read	24	static
+i2c.c:140:6:I2C_eventCallback	16	static
+i2c.c:152:6:add_I2C_Init	8	static

@@ -35,13 +35,13 @@
 #define seg_G_Port GPIOB
 #define seg_DP_Port GPIOB
 
-#define dig_1_Pin LL_GPIO_PIN_5
+#define dig_1_Pin LL_GPIO_PIN_0
 #define dig_2_Pin LL_GPIO_PIN_4
-#define dig_3_Pin LL_GPIO_PIN_6
+#define dig_3_Pin LL_GPIO_PIN_12
 #define dig_4_Pin LL_GPIO_PIN_2
 #define dig_time_Pin LL_GPIO_PIN_7
 
-#define dig_1_Port GPIOA
+#define dig_1_Port GPIOB
 #define dig_2_Port GPIOA
 #define dig_3_Port GPIOA
 #define dig_4_Port GPIOA

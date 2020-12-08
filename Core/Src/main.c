@@ -52,9 +52,14 @@
 /* USER CODE BEGIN PV */
 float data[NUM_DATA]; // {azimuth, temperature, humidity, pressure, altitude}
 float minDataVal[] = {-99.9, -99.9, 0, 0, -9999.9};
-float maxDataVal[] = {99.9, 99.9, 99, 9999.99, 9999.9};
+float maxDataVal[] = {99.9, 99.9, 999, 9999.99, 9999.9};
 uint8_t dataID = 0;
+uint8_t check[3];
 
+static uint8_t compStr[13];
+int t;
+
+static float mag[3];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -110,9 +115,9 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   //lsm6ds0_init();
-  hts221_init();
-  lps25hb_init();
-  lis3mdl_init();
+  check[0] = hts221_init();
+  check[1] = lps25hb_init();
+  check[2] = lis3mdl_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -123,6 +128,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  MAIN_updateData();
+
 	  LL_mDelay(50);
   }
   /* USER CODE END 3 */
@@ -163,7 +169,7 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 	void writeDisplay(){
-		static uint8_t compStr[13];
+		//static uint8_t compStr[13];
 		switch (dataID){
 			case 0:
 				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"MAG_%04.1f",data[dataID]));
@@ -172,7 +178,7 @@ void SystemClock_Config(void)
 				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"TEMP_%04.1f",data[dataID]));
 				break;
 			case 2:
-				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"HUM_%02.0f",data[dataID]));
+				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr ,"HUM_%02d",(int)data[dataID]));
 				break;
 			case 3:
 				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"BAR_%07.2f",data[dataID]));
@@ -189,21 +195,34 @@ void SystemClock_Config(void)
 		DISPLAY_resetCurPos();
 	}
 
+	uint8_t MAIN_checkButtonState(GPIO_TypeDef* PORT, uint8_t PIN, uint8_t edge, uint8_t samples_window, uint8_t samples_required)
+	{
+		uint8_t cnt = 0; // counts samples in row
+		for(; samples_window > 0 ; samples_window--){
+			if( edge ^ LL_GPIO_IsInputPinSet(tlacidlo_GPIO_Port, tlacidlo_Pin))
+				cnt++;
+			else
+				cnt = 0;
+
+			if(cnt >= samples_required)
+				return 1;
+		}
+		return 0;
+	}
+
 	void MAIN_updateData(){
 		//static float acc[3];
 		//lsm6ds0_get_acc(acc, (acc+1), (acc+2));
-		static float mag[3];
+		//static float mag[3];
 		lis3mdl_get_mag(mag,(mag+1), (mag+2));
-		data[0] = calcAzimuth(mag[0], mag[1]);
+		data[0] = adjustData(calcAzimuth(mag[0], mag[1]),minDataVal[0],maxDataVal[0]);
 
-		data[1] = hts221_get_temp();
-		data[2] = hts221_get_humidity();
-		data[3] = lps25hb_get_press();
-		data[4] = calcAltitude(data[1], data[3]);
+		data[1] = adjustData(hts221_get_temp(),minDataVal[1],maxDataVal[1]);
+		data[2] = adjustData(hts221_get_humidity(),minDataVal[2],maxDataVal[2]);
+		data[3] = adjustData(lps25hb_get_press(),minDataVal[3],maxDataVal[3]);
+		data[4] = adjustData(calcAltitude(data[1], data[3]),minDataVal[4],maxDataVal[4]);
 
-		for (int i = 0; i < NUM_DATA; i++){
-			data[i] = adjustData(data[i],minDataVal[i],maxDataVal[i]);
-		}
+		writeDisplay();
 	}
 
 	float adjustData(float value, float minValue, float maxValue){
@@ -218,10 +237,10 @@ void SystemClock_Config(void)
 	}
 
 	float calcAzimuth(float x, float y){
-		return (float) (atan2((double)y,(double)x)) * 180.0f/3.1415f;
+		return (float) 90.0f  - (atan2((double)y,(double)x)) * 180.0f/3.1415f;
 	}
 
-	float calcAltitude(float pressure, float temperature){
+	float calcAltitude(float temperature, float pressure){
 		const float P0 = 1013.25;
 		return (float) (pow((double)(P0/pressure), (double)(1.0f/5.257f)) -1.0f) * (temperature + 273.15f)/0.0065f;
 	}

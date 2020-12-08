@@ -201,23 +201,34 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles EXTI line 0 interrupt.
+  * @brief This function handles EXTI line 3 interrupt.
   */
-void EXTI0_IRQHandler(void)
+void EXTI3_IRQHandler(void)
 {
-  /* USER CODE BEGIN EXTI0_IRQn 0 */
-
-  /* USER CODE END EXTI0_IRQn 0 */
-  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_0) != RESET)
+  /* USER CODE BEGIN EXTI3_IRQn 0 */
+	if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_3) != RESET)
+	{
+		if(MAIN_checkButtonState(tlacidlo_GPIO_Port,
+								tlacidlo_Pin,
+								BUTTON_EXTI_TRIGGER,
+								BUTTON_EXTI_SAMPLES_WINDOW,
+								BUTTON_EXTI_SAMPLES_REQUIRED))
+		{
+			MAIN_buttonShiftDataID();
+		}
+		LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_3);
+	}
+  /* USER CODE END EXTI3_IRQn 0 */
+  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_3) != RESET)
   {
-    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);
-    /* USER CODE BEGIN LL_EXTI_LINE_0 */
-    MAIN_buttonShiftDataID();
-    /* USER CODE END LL_EXTI_LINE_0 */
-  }
-  /* USER CODE BEGIN EXTI0_IRQn 1 */
+   // LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_3);
+    /* USER CODE BEGIN LL_EXTI_LINE_3 */
 
-  /* USER CODE END EXTI0_IRQn 1 */
+    /* USER CODE END LL_EXTI_LINE_3 */
+  }
+  /* USER CODE BEGIN EXTI3_IRQn 1 */
+
+  /* USER CODE END EXTI3_IRQn 1 */
 }
 
 /**
@@ -227,7 +238,6 @@ void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
 	if(LL_TIM_IsActiveFlag_UPDATE(TIM2)){
-		MAIN_updateData();
 		DISPLAY_displayCurStr();
 		LL_TIM_ClearFlag_UPDATE(TIM2);
 	}

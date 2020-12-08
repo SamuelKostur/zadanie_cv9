@@ -30,18 +30,42 @@ void hts221_readArray(uint8_t * data, uint8_t reg, uint8_t length)
 
 float hts221_get_temp()
 {
-	uint8_t temp[2];
-	hts221_readArray(temp, HTS221_ADDRESS_TEMP_L, 2);
+	uint8_t MSB_Tx = hts221_read_byte(HTS221_ADDRESS_MSB_T0_T1_degC_x8);
+	int16_t MSB_T0 = ((int16_t) (MSB_Tx & 0b00000011)) << 8;
+	int16_t MSB_T1 = ((int16_t) (MSB_Tx & 0b00001100)) << 6;
 
-	return (float)((temp[1] << 8) | temp[0]) / 8.0f;
+	float T0_degC = (float) ((int16_t)hts221_read_byte(HTS221_ADDRESS_T0_degC_x8) | MSB_T0) / 8.0f;
+	float T1_degC = (float) ((int16_t)hts221_read_byte(HTS221_ADDRESS_T1_degC_x8) | MSB_T1) / 8.0f;
+
+	uint8_t temporary[2];
+	hts221_readArray(temporary, HTS221_ADDRESS_T0_OUT_L, 2);
+	int16_t T0_OUT =  (int16_t)(temporary[1] << 8) | temporary[0];
+
+	hts221_readArray(temporary, HTS221_ADDRESS_T1_OUT_L, 2);
+	int16_t T1_OUT = (int16_t)(temporary[1] << 8) | temporary[0];
+
+	hts221_readArray(temporary, HTS221_ADDRESS_TEMP_L, 2);
+	int16_t T_OUT =  (int16_t)(temporary[1] << 8) | temporary[0];
+
+	return (T1_degC - T0_degC) * (T_OUT - T0_OUT) / (T1_OUT - T0_OUT) + T0_degC;
 }
 
 float hts221_get_humidity()
 {
-	uint8_t hum[2];
-	hts221_readArray(hum, HTS221_ADDRESS_TEMP_L, 2);
+	float H0_rh = hts221_read_byte(HTS221_ADDRESS_H0_rH_x2)/ 2.0f;
+	float H1_rh = hts221_read_byte(HTS221_ADDRESS_H1_rH_x2)/ 2.0f;
 
-	return (float)((hum[1] << 8) | hum[0]) / 2.0f;
+	uint8_t temporary[2];
+	hts221_readArray(temporary, HTS221_ADDRESS_H0_OUT_L, 2);
+	int16_t H0_OUT =  (int16_t)(temporary[1] << 8) | temporary[0];
+
+	hts221_readArray(temporary, HTS221_ADDRESS_H1_OUT_L, 2);
+	int16_t H1_OUT =  (int16_t)(temporary[1] << 8) | temporary[0];
+
+	hts221_readArray(temporary, HTS221_ADDRESS_HUM_L, 2);
+	int16_t H_OUT =  (int16_t)(temporary[1] << 8) | temporary[0];
+
+	return (H1_rh - H0_rh) * (H_OUT - H0_OUT) / (H1_OUT - H0_OUT) + H0_rh;
 }
 
 

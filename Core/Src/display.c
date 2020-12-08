@@ -7,10 +7,11 @@
 #include "display.h"
 
 //global variables
-uint8_t curStr[NUM_DIG-1];
+uint8_t curStr[NUM_DIG];
 uint8_t complStr[MAX_STR_LENGTH];
 uint8_t complStrLen = 19; //length without null char
 uint8_t curPos = 0;
+uint8_t shiftDir = LEFT_TO_RIGHT;
 int8_t decSepPos = -5; //default value meaning there is no decimal point in string
 
 // 0b dABC DEFG
@@ -95,7 +96,7 @@ void resetAllDigits(void)
 
 //Functions to handle shifting of the currently displaying string
 void DISPLAY_shiftCurStr(){
-	static uint8_t shiftDir = LEFT_TO_RIGHT;
+	//static uint8_t shiftDir = LEFT_TO_RIGHT;
 
 	updateCurPos(&curPos, shiftDir);
 	updateShiftDir(curPos, &shiftDir);
@@ -136,16 +137,18 @@ void DISPLAY_setCompStr(uint8_t *newComplStr,uint8_t size){
 			complStr[i] = newComplStr[i];
 		}
 		else{
+
 			complStr[i] = newComplStr[i+1];
 		}
 	}
 
 
-	complStrLen = decSepPos == 5 ? size : (size - 1);  //(size-1) because '.' was extracted
+	complStrLen = (decSepPos == -5) ? size : (size - 1);  //(size-1) because '.' was extracted
 	complStr[complStrLen] = '\0';
 }
 
 void DISPLAY_resetCurPos(){
 	curPos = 0;
+	shiftDir = LEFT_TO_RIGHT;
 }
 
