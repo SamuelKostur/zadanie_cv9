@@ -52,8 +52,8 @@ float hts221_get_temp()
 
 float hts221_get_humidity()
 {
-	float H0_rh = hts221_read_byte(HTS221_ADDRESS_H0_rH_x2)/ 2.0f;
-	float H1_rh = hts221_read_byte(HTS221_ADDRESS_H1_rH_x2)/ 2.0f;
+	const float H0_rh = hts221_read_byte(HTS221_ADDRESS_H0_rH_x2)/ 2.0f;
+	const float H1_rh = hts221_read_byte(HTS221_ADDRESS_H1_rH_x2)/ 2.0f;
 
 	uint8_t temporary[2];
 	hts221_readArray(temporary, HTS221_ADDRESS_H0_OUT_L, 2);

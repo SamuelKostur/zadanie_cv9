@@ -21,29 +21,29 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         00000238  20000000  08007a48  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000084  20000238  08007c80  00020238  2**2
+  9 .bss          00000080  20000238  08007c80  00020238  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  200002bc  08007c80  000202bc  2**0
+ 10 ._user_heap_stack 00000600  200002b8  08007c80  000202b8  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020238  2**0
                   CONTENTS, READONLY
  12 .debug_info   0000caae  00000000  00000000  00020268  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 000022dd  00000000  00000000  0002cd16  2**0
+ 13 .debug_abbrev 000022e4  00000000  00000000  0002cd16  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000910  00000000  00000000  0002eff8  2**3
+ 14 .debug_aranges 00000910  00000000  00000000  0002f000  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000808  00000000  00000000  0002f908  2**3
+ 15 .debug_ranges 00000808  00000000  00000000  0002f910  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0001e56b  00000000  00000000  00030110  2**0
+ 16 .debug_macro  0001e56b  00000000  00000000  00030118  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0000881a  00000000  00000000  0004e67b  2**0
+ 17 .debug_line   0000881a  00000000  00000000  0004e683  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000a7db7  00000000  00000000  00056e95  2**0
+ 18 .debug_str    000a7db7  00000000  00000000  00056e9d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000fec4c  2**0
+ 19 .comment      0000007b  00000000  00000000  000fec54  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000309c  00000000  00000000  000fecc8  2**2
+ 20 .debug_frame  0000309c  00000000  00000000  000fecd0  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1537,13 +1537,15 @@ void DISPLAY_setCompStr(uint8_t *newComplStr,uint8_t size){
 void DISPLAY_resetCurPos(){
  8000fe4:	b480      	push	{r7}
  8000fe6:	af00      	add	r7, sp, #0
-	curPos = 0;
+	//curPos = 0;
+	//shiftDir = LEFT_TO_RIGHT;
+	curPos = 1;
  8000fe8:	4b05      	ldr	r3, [pc, #20]	; (8001000 <DISPLAY_resetCurPos+0x1c>)
- 8000fea:	2200      	movs	r2, #0
+ 8000fea:	2201      	movs	r2, #1
  8000fec:	701a      	strb	r2, [r3, #0]
-	shiftDir = LEFT_TO_RIGHT;
+	shiftDir = RIGHT_TO_LEFT;
  8000fee:	4b05      	ldr	r3, [pc, #20]	; (8001004 <DISPLAY_resetCurPos+0x20>)
- 8000ff0:	2201      	movs	r2, #1
+ 8000ff0:	2200      	movs	r2, #0
  8000ff2:	701a      	strb	r2, [r3, #0]
 }
  8000ff4:	bf00      	nop
@@ -2322,7 +2324,7 @@ float hts221_get_humidity()
  800150c:	b580      	push	{r7, lr}
  800150e:	b084      	sub	sp, #16
  8001510:	af00      	add	r7, sp, #0
-	float H0_rh = hts221_read_byte(HTS221_ADDRESS_H0_rH_x2)/ 2.0f;
+	const float H0_rh = hts221_read_byte(HTS221_ADDRESS_H0_rH_x2)/ 2.0f;
  8001512:	2030      	movs	r0, #48	; 0x30
  8001514:	f7ff ff2e 	bl	8001374 <hts221_read_byte>
  8001518:	4603      	mov	r3, r0
@@ -2331,7 +2333,7 @@ float hts221_get_humidity()
  8001522:	eef0 6a00 	vmov.f32	s13, #0	; 0x40000000  2.0
  8001526:	eec7 7a26 	vdiv.f32	s15, s14, s13
  800152a:	edc7 7a03 	vstr	s15, [r7, #12]
-	float H1_rh = hts221_read_byte(HTS221_ADDRESS_H1_rH_x2)/ 2.0f;
+	const float H1_rh = hts221_read_byte(HTS221_ADDRESS_H1_rH_x2)/ 2.0f;
  800152e:	2031      	movs	r0, #49	; 0x31
  8001530:	f7ff ff20 	bl	8001374 <hts221_read_byte>
  8001534:	4603      	mov	r3, r0
@@ -4534,7 +4536,7 @@ int main(void)
  8002286:	f001 fe67 	bl	8003f58 <LL_mDelay>
 	  MAIN_updateData();
  800228a:	e7f9      	b.n	8002280 <main+0x50>
- 800228c:	200002a0 	.word	0x200002a0
+ 800228c:	2000029c 	.word	0x2000029c
 
 08002290 <SystemClock_Config>:
 /**
@@ -4615,7 +4617,7 @@ void SystemClock_Config(void)
 	void writeDisplay(){
  80022fc:	b598      	push	{r3, r4, r7, lr}
  80022fe:	af00      	add	r7, sp, #0
-		//static uint8_t compStr[13];
+		static uint8_t compStr[13];
 		switch (dataID){
  8002300:	4b44      	ldr	r3, [pc, #272]	; (8002414 <writeDisplay+0x118>)
  8002302:	781b      	ldrb	r3, [r3, #0]
@@ -4749,7 +4751,7 @@ void SystemClock_Config(void)
  8002410:	bf00      	nop
  8002412:	bd98      	pop	{r3, r4, r7, pc}
  8002414:	20000258 	.word	0x20000258
- 8002418:	200002a4 	.word	0x200002a4
+ 8002418:	200002a0 	.word	0x200002a0
  800241c:	08007688 	.word	0x08007688
  8002420:	2000025c 	.word	0x2000025c
  8002424:	08007694 	.word	0x08007694
@@ -4861,9 +4863,7 @@ void SystemClock_Config(void)
 	void MAIN_updateData(){
  80024d4:	b580      	push	{r7, lr}
  80024d6:	af00      	add	r7, sp, #0
-		//static float acc[3];
-		//lsm6ds0_get_acc(acc, (acc+1), (acc+2));
-		//static float mag[3];
+		static float mag[3];
 		lis3mdl_get_mag(mag,(mag+1), (mag+2));
  80024d8:	4b48      	ldr	r3, [pc, #288]	; (80025fc <MAIN_updateData+0x128>)
  80024da:	4a49      	ldr	r2, [pc, #292]	; (8002600 <MAIN_updateData+0x12c>)
@@ -4965,7 +4965,7 @@ void SystemClock_Config(void)
  8002604:	2000026c 	.word	0x2000026c
  8002608:	20000038 	.word	0x20000038
  800260c:	2000004c 	.word	0x2000004c
- 8002610:	200002a4 	.word	0x200002a4
+ 8002610:	200002a0 	.word	0x200002a0
 
 08002614 <adjustData>:
 
@@ -5600,7 +5600,7 @@ void *_sbrk(ptrdiff_t incr)
  8002970:	20003000 	.word	0x20003000
  8002974:	00000400 	.word	0x00000400
  8002978:	20000278 	.word	0x20000278
- 800297c:	200002c0 	.word	0x200002c0
+ 800297c:	200002b8 	.word	0x200002b8
 
 08002980 <SystemInit>:
   * @brief  Setup the microcontroller system
@@ -6357,7 +6357,7 @@ LoopForever:
   ldr r2, =_sbss
  8002e54:	20000238 	.word	0x20000238
   ldr r4, =_ebss
- 8002e58:	200002bc 	.word	0x200002bc
+ 8002e58:	200002b8 	.word	0x200002b8
 
 08002e5c <ADC1_2_IRQHandler>:
  * @retval : None
@@ -12675,7 +12675,7 @@ void LL_SetSystemCoreClock(uint32_t HCLKFrequency)
  800601e:	b103      	cbz	r3, 8006022 <_sbrk_r+0x1a>
  8006020:	602b      	str	r3, [r5, #0]
  8006022:	bd38      	pop	{r3, r4, r5, pc}
- 8006024:	200002b8 	.word	0x200002b8
+ 8006024:	200002b4 	.word	0x200002b4
 
 08006028 <memmove>:
  8006028:	4288      	cmp	r0, r1

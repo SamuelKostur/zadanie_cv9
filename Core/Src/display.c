@@ -148,7 +148,7 @@ void DISPLAY_setCompStr(uint8_t *newComplStr,uint8_t size){
 }
 
 void DISPLAY_resetCurPos(){
-	curPos = 0;
-	shiftDir = LEFT_TO_RIGHT;
+	curPos = 1; //this way it starts from the real beginning not from the second position
+	shiftDir = RIGHT_TO_LEFT;
 }
 

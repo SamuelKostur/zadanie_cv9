@@ -52,14 +52,9 @@
 /* USER CODE BEGIN PV */
 float data[NUM_DATA]; // {azimuth, temperature, humidity, pressure, altitude}
 float minDataVal[] = {-99.9, -99.9, 0, 0, -9999.9};
-float maxDataVal[] = {99.9, 99.9, 999, 9999.99, 9999.9};
+float maxDataVal[] = {99.9, 99.9, 99, 9999.99, 9999.9};
 uint8_t dataID = 0;
 uint8_t check[3];
-
-static uint8_t compStr[13];
-int t;
-
-static float mag[3];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -169,7 +164,7 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 	void writeDisplay(){
-		//static uint8_t compStr[13];
+		static uint8_t compStr[13];
 		switch (dataID){
 			case 0:
 				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"MAG_%04.1f",data[dataID]));
@@ -211,9 +206,7 @@ void SystemClock_Config(void)
 	}
 
 	void MAIN_updateData(){
-		//static float acc[3];
-		//lsm6ds0_get_acc(acc, (acc+1), (acc+2));
-		//static float mag[3];
+		static float mag[3];
 		lis3mdl_get_mag(mag,(mag+1), (mag+2));
 		data[0] = adjustData(calcAzimuth(mag[0], mag[1]),minDataVal[0],maxDataVal[0]);
 
