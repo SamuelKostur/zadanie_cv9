@@ -30,6 +30,8 @@ void hts221_readArray(uint8_t * data, uint8_t reg, uint8_t length)
 
 float hts221_get_temp()
 {
+	// return [°C]
+
 	uint8_t MSB_Tx = hts221_read_byte(HTS221_ADDRESS_MSB_T0_T1_degC_x8);
 	int16_t MSB_T0 = ((int16_t) (MSB_Tx & 0b00000011)) << 8;
 	int16_t MSB_T1 = ((int16_t) (MSB_Tx & 0b00001100)) << 6;
@@ -52,6 +54,9 @@ float hts221_get_temp()
 
 float hts221_get_humidity()
 {
+
+	//return [hPa]
+
 	const float H0_rh = hts221_read_byte(HTS221_ADDRESS_H0_rH_x2)/ 2.0f;
 	const float H1_rh = hts221_read_byte(HTS221_ADDRESS_H1_rH_x2)/ 2.0f;
 
@@ -74,7 +79,7 @@ uint8_t hts221_init(void)
 {
 	uint8_t status = 1;
 
-	LL_mDelay(100);
+	LL_mDelay(100); //???
 
 	uint8_t val = hts221_read_byte(HTS221_WHO_AM_I_ADDRES);
 
@@ -87,7 +92,7 @@ uint8_t hts221_init(void)
 	}
 
 	//hts221 device init
-	uint8_t ctrl1 = 0b10000011;
+	uint8_t ctrl1 = 0b10000011;//start, set frequency
 	hts221_write_byte(HTS221_ADDRESS_CTRL1, ctrl1);
 
 	return status;

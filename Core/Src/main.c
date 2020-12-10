@@ -50,6 +50,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+//niake oznacenie by sa ti hodilo, aby si vedel, ze sa jedna o globalnu premenu..
 float data[NUM_DATA]; // {azimuth, temperature, humidity, pressure, altitude}
 float minDataVal[] = {-99.9, -99.9, 0, 0, -9999.9};
 float maxDataVal[] = {99.9, 99.9, 99, 9999.99, 9999.9};
@@ -164,7 +165,7 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 	void writeDisplay(){
-		static uint8_t compStr[13];
+		static char compStr[13];
 		switch (dataID){
 			case 0:
 				DISPLAY_setCompStr(compStr ,sprintf((char*) compStr,"MAG_%04.1f",data[dataID]));
@@ -192,6 +193,7 @@ void SystemClock_Config(void)
 
 	uint8_t MAIN_checkButtonState(GPIO_TypeDef* PORT, uint8_t PIN, uint8_t edge, uint8_t samples_window, uint8_t samples_required)
 	{
+		//check edge of the button
 		uint8_t cnt = 0; // counts samples in row
 		for(; samples_window > 0 ; samples_window--){
 			if( edge ^ LL_GPIO_IsInputPinSet(tlacidlo_GPIO_Port, tlacidlo_Pin))
@@ -206,10 +208,10 @@ void SystemClock_Config(void)
 	}
 
 	void MAIN_updateData(){
+
 		static float mag[3];
 		lis3mdl_get_mag(mag,(mag+1), (mag+2));
 		data[0] = adjustData(calcAzimuth(mag[0], mag[1]),minDataVal[0],maxDataVal[0]);
-
 		data[1] = adjustData(hts221_get_temp(),minDataVal[1],maxDataVal[1]);
 		data[2] = adjustData(hts221_get_humidity(),minDataVal[2],maxDataVal[2]);
 		data[3] = adjustData(lps25hb_get_press(),minDataVal[3],maxDataVal[3]);
@@ -219,6 +221,8 @@ void SystemClock_Config(void)
 	}
 
 	float adjustData(float value, float minValue, float maxValue){
+		// saturation of data
+
 		if(value < minValue){
 			value = minValue;
 		}
@@ -230,10 +234,17 @@ void SystemClock_Config(void)
 	}
 
 	float calcAzimuth(float x, float y){
+		// x, y [gauss] (magnetic induction)
+
 		return (float) 90.0f  - (atan2((double)y,(double)x)) * 180.0f/3.1415f;
 	}
 
 	float calcAltitude(float temperature, float pressure){
+		// temperature [°C]
+		// pressure [hPa]
+
+		// https://keisan.casio.com/has10/SpecExec.cgi?id=system/2006/1224585971
+
 		const float P0 = 1013.25;
 		return (float) (pow((double)(P0/pressure), (double)(1.0f/5.257f)) -1.0f) * (temperature + 273.15f)/0.0065f;
 	}

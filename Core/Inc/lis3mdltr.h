@@ -234,7 +234,9 @@
 
 uint8_t lis3mdl_init(void);
 void lis3mdl_get_mag(float* x, float * y, float * z);
-uint8_t lis3mdl_read_byte(uint8_t reg_addr);
+// telo je kde?
 void lis3mdl_set_meas_freq(uint8_t meas_frequency);
 int8_t lis3mdl_get_temp();
+//?? preco je v .h read write Byte?
 void lis3mdl_write_byte(uint8_t reg_addr, uint8_t value);
+uint8_t lis3mdl_read_byte(uint8_t reg_addr);

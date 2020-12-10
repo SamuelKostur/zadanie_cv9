@@ -30,6 +30,7 @@ void lps25hb_readArray(uint8_t * data, uint8_t reg, uint8_t length)
 
 float lps25hb_get_press()
 {
+	// get pressure [hPa]
 	uint8_t temp[3];
 	lps25hb_readArray(temp, LPS25HB_ADDRESS_PRESS_XL, 3);
 
@@ -44,7 +45,7 @@ uint8_t lps25hb_init(void)
 
 	uint8_t status = 1;
 
-	LL_mDelay(100);
+	LL_mDelay(100);//??
 
 	uint8_t val = lps25hb_read_byte(LPS25HB_WHO_AM_I_ADDRES);
 
@@ -66,7 +67,7 @@ uint8_t lps25hb_init(void)
 		}
 
 	//lps25hb device init
-	uint8_t ctrl1 = 0b11000000;
+	uint8_t ctrl1 = 0b11000000;//start device, and set freq
 	lps25hb_write_byte(LPS25HB_ADDRESS_CTRL1, ctrl1);
 
 	return status;

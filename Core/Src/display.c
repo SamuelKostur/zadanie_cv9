@@ -125,6 +125,7 @@ void setCurStr(uint8_t curPos){
 
 //Function to change the complete string which is continuously being displayed on the display
 void DISPLAY_setCompStr(uint8_t *newComplStr,uint8_t size){
+	//size - size of string without '\0'
 	//determine position of the decimal point and parse string
 	decSepPos = -5;
 

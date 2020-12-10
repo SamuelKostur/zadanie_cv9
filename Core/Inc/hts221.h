@@ -33,6 +33,7 @@
 #define		HTS221_ADDRESS_H1_OUT_L					0x3A
 
 uint8_t hts221_init(void);
+// preco je read a write v .h? Preco ma toto vidiet main?
 uint8_t hts221_read_byte(uint8_t reg_addr);
 void hts221_write_byte(uint8_t reg_addr, uint8_t value);
 float hts221_get_temp();

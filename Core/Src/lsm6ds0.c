@@ -69,7 +69,7 @@ uint8_t lsm6ds0_init(void)
 
 	//LIS3MDL_ACC_ON;
 
-	LL_mDelay(100);
+	LL_mDelay(100);// - Aky má toto zmysel?
 
 	uint8_t val = lsm6ds0_read_byte(LSM6DS0_WHO_AM_I_ADDRES);
 
