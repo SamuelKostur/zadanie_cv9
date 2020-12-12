@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020238  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000caae  00000000  00000000  00020268  2**0
+ 12 .debug_info   0000cabb  00000000  00000000  00020268  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 000022e4  00000000  00000000  0002cd16  2**0
+ 13 .debug_abbrev 000022e4  00000000  00000000  0002cd23  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000910  00000000  00000000  0002f000  2**3
+ 14 .debug_aranges 00000910  00000000  00000000  0002f008  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000808  00000000  00000000  0002f910  2**3
+ 15 .debug_ranges 00000808  00000000  00000000  0002f918  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0001e56b  00000000  00000000  00030118  2**0
+ 16 .debug_macro  0001e56b  00000000  00000000  00030120  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0000881a  00000000  00000000  0004e683  2**0
+ 17 .debug_line   0000881a  00000000  00000000  0004e68b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000a7db7  00000000  00000000  00056e9d  2**0
+ 18 .debug_str    000a7dca  00000000  00000000  00056ea5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000fec54  2**0
+ 19 .comment      0000007b  00000000  00000000  000fec6f  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000309c  00000000  00000000  000fecd0  2**2
+ 20 .debug_frame  0000309c  00000000  00000000  000fecec  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1040,7 +1040,7 @@ void DISPLAY_displayCurStr(){
 	resetAllDigits();
  8000c86:	f000 f8bf 	bl	8000e08 <resetAllDigits>
 
-	updateAlphanumChar( segVal_ASCII[ toupper(curStr[curActDig]) - '0'] );
+	updateAlphanumChar( segVal_ASCII[ toupper(curStr[curActDig]) - segVal_ASCII_start] );
  8000c8a:	4b1b      	ldr	r3, [pc, #108]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
  8000c8c:	781b      	ldrb	r3, [r3, #0]
  8000c8e:	461a      	mov	r2, r3
@@ -1060,41 +1060,41 @@ void DISPLAY_displayCurStr(){
  8000cae:	3b20      	subs	r3, #32
  8000cb0:	e000      	b.n	8000cb4 <DISPLAY_displayCurStr+0x34>
  8000cb2:	79fb      	ldrb	r3, [r7, #7]
- 8000cb4:	3b30      	subs	r3, #48	; 0x30
- 8000cb6:	4a12      	ldr	r2, [pc, #72]	; (8000d00 <DISPLAY_displayCurStr+0x80>)
- 8000cb8:	5cd3      	ldrb	r3, [r2, r3]
- 8000cba:	4618      	mov	r0, r3
- 8000cbc:	f000 f822 	bl	8000d04 <updateAlphanumChar>
+ 8000cb4:	222d      	movs	r2, #45	; 0x2d
+ 8000cb6:	1a9b      	subs	r3, r3, r2
+ 8000cb8:	4a11      	ldr	r2, [pc, #68]	; (8000d00 <DISPLAY_displayCurStr+0x80>)
+ 8000cba:	5cd3      	ldrb	r3, [r2, r3]
+ 8000cbc:	4618      	mov	r0, r3
+ 8000cbe:	f000 f821 	bl	8000d04 <updateAlphanumChar>
 	updateDecimalPoint(curActDig);
- 8000cc0:	4b0d      	ldr	r3, [pc, #52]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
- 8000cc2:	781b      	ldrb	r3, [r3, #0]
- 8000cc4:	4618      	mov	r0, r3
- 8000cc6:	f000 f849 	bl	8000d5c <updateDecimalPoint>
+ 8000cc2:	4b0d      	ldr	r3, [pc, #52]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
+ 8000cc4:	781b      	ldrb	r3, [r3, #0]
+ 8000cc6:	4618      	mov	r0, r3
+ 8000cc8:	f000 f848 	bl	8000d5c <updateDecimalPoint>
 	setDigit(curActDig);
- 8000cca:	4b0b      	ldr	r3, [pc, #44]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
- 8000ccc:	781b      	ldrb	r3, [r3, #0]
- 8000cce:	4618      	mov	r0, r3
- 8000cd0:	f000 f862 	bl	8000d98 <setDigit>
+ 8000ccc:	4b0a      	ldr	r3, [pc, #40]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
+ 8000cce:	781b      	ldrb	r3, [r3, #0]
+ 8000cd0:	4618      	mov	r0, r3
+ 8000cd2:	f000 f861 	bl	8000d98 <setDigit>
 	curActDig++;
- 8000cd4:	4b08      	ldr	r3, [pc, #32]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
- 8000cd6:	781b      	ldrb	r3, [r3, #0]
- 8000cd8:	3301      	adds	r3, #1
- 8000cda:	b2da      	uxtb	r2, r3
- 8000cdc:	4b06      	ldr	r3, [pc, #24]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
- 8000cde:	701a      	strb	r2, [r3, #0]
+ 8000cd6:	4b08      	ldr	r3, [pc, #32]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
+ 8000cd8:	781b      	ldrb	r3, [r3, #0]
+ 8000cda:	3301      	adds	r3, #1
+ 8000cdc:	b2da      	uxtb	r2, r3
+ 8000cde:	4b06      	ldr	r3, [pc, #24]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
+ 8000ce0:	701a      	strb	r2, [r3, #0]
 	curActDig %= 4;
- 8000ce0:	4b05      	ldr	r3, [pc, #20]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
- 8000ce2:	781b      	ldrb	r3, [r3, #0]
- 8000ce4:	f003 0303 	and.w	r3, r3, #3
- 8000ce8:	b2da      	uxtb	r2, r3
- 8000cea:	4b03      	ldr	r3, [pc, #12]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
- 8000cec:	701a      	strb	r2, [r3, #0]
+ 8000ce2:	4b05      	ldr	r3, [pc, #20]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
+ 8000ce4:	781b      	ldrb	r3, [r3, #0]
+ 8000ce6:	f003 0303 	and.w	r3, r3, #3
+ 8000cea:	b2da      	uxtb	r2, r3
+ 8000cec:	4b02      	ldr	r3, [pc, #8]	; (8000cf8 <DISPLAY_displayCurStr+0x78>)
+ 8000cee:	701a      	strb	r2, [r3, #0]
 }
- 8000cee:	bf00      	nop
- 8000cf0:	3708      	adds	r7, #8
- 8000cf2:	46bd      	mov	sp, r7
- 8000cf4:	bd80      	pop	{r7, pc}
- 8000cf6:	bf00      	nop
+ 8000cf0:	bf00      	nop
+ 8000cf2:	3708      	adds	r7, #8
+ 8000cf4:	46bd      	mov	sp, r7
+ 8000cf6:	bd80      	pop	{r7, pc}
  8000cf8:	20000255 	.word	0x20000255
  8000cfc:	20000284 	.word	0x20000284
  8000d00:	080076c4 	.word	0x080076c4
@@ -1143,7 +1143,7 @@ void updateAlphanumChar(uint8_t segmentValues){
  8000d50:	bd80      	pop	{r7, pc}
  8000d52:	bf00      	nop
  8000d54:	20000004 	.word	0x20000004
- 8000d58:	08007710 	.word	0x08007710
+ 8000d58:	08007714 	.word	0x08007714
 
 08000d5c <updateDecimalPoint>:
 
@@ -1201,7 +1201,7 @@ void setDigit(uint8_t pos){
  8000dbc:	46bd      	mov	sp, r7
  8000dbe:	bd80      	pop	{r7, pc}
  8000dc0:	20000024 	.word	0x20000024
- 8000dc4:	08007730 	.word	0x08007730
+ 8000dc4:	08007734 	.word	0x08007734
 
 08000dc8 <resetAllSegments>:
 
@@ -1238,7 +1238,7 @@ void resetAllSegments(){
  8000dfc:	bd80      	pop	{r7, pc}
  8000dfe:	bf00      	nop
  8000e00:	20000004 	.word	0x20000004
- 8000e04:	08007710 	.word	0x08007710
+ 8000e04:	08007714 	.word	0x08007714
 
 08000e08 <resetAllDigits>:
 
@@ -1276,7 +1276,7 @@ void resetAllDigits(void)
  8000e3c:	bd80      	pop	{r7, pc}
  8000e3e:	bf00      	nop
  8000e40:	20000024 	.word	0x20000024
- 8000e44:	08007730 	.word	0x08007730
+ 8000e44:	08007734 	.word	0x08007734
 
 08000e48 <DISPLAY_shiftCurStr>:
 
@@ -1433,6 +1433,7 @@ void DISPLAY_setCompStr(uint8_t *newComplStr,uint8_t size){
  8000f36:	6078      	str	r0, [r7, #4]
  8000f38:	460b      	mov	r3, r1
  8000f3a:	70fb      	strb	r3, [r7, #3]
+	//size - size of string without '\0'
 	//determine position of the decimal point and parse string
 	decSepPos = -5;
  8000f3c:	4b26      	ldr	r3, [pc, #152]	; (8000fd8 <DISPLAY_setCompStr+0xa8>)
@@ -1537,9 +1538,7 @@ void DISPLAY_setCompStr(uint8_t *newComplStr,uint8_t size){
 void DISPLAY_resetCurPos(){
  8000fe4:	b480      	push	{r7}
  8000fe6:	af00      	add	r7, sp, #0
-	//curPos = 0;
-	//shiftDir = LEFT_TO_RIGHT;
-	curPos = 1;
+	curPos = 1; //this way it starts from the real beginning not from the second position
  8000fe8:	4b05      	ldr	r3, [pc, #20]	; (8001000 <DISPLAY_resetCurPos+0x1c>)
  8000fea:	2201      	movs	r2, #1
  8000fec:	701a      	strb	r2, [r3, #0]
@@ -2204,6 +2203,8 @@ float hts221_get_temp()
  8001404:	b580      	push	{r7, lr}
  8001406:	b086      	sub	sp, #24
  8001408:	af00      	add	r7, sp, #0
+	// return [°C]
+
 	uint8_t MSB_Tx = hts221_read_byte(HTS221_ADDRESS_MSB_T0_T1_degC_x8);
  800140a:	2035      	movs	r0, #53	; 0x35
  800140c:	f7ff ffb2 	bl	8001374 <hts221_read_byte>
@@ -2324,6 +2325,9 @@ float hts221_get_humidity()
  800150c:	b580      	push	{r7, lr}
  800150e:	b084      	sub	sp, #16
  8001510:	af00      	add	r7, sp, #0
+
+	//return [hPa]
+
 	const float H0_rh = hts221_read_byte(HTS221_ADDRESS_H0_rH_x2)/ 2.0f;
  8001512:	2030      	movs	r0, #48	; 0x30
  8001514:	f7ff ff2e 	bl	8001374 <hts221_read_byte>
@@ -2426,7 +2430,7 @@ uint8_t hts221_init(void)
  80015e8:	2301      	movs	r3, #1
  80015ea:	71fb      	strb	r3, [r7, #7]
 
-	LL_mDelay(100);
+	LL_mDelay(100); //???
  80015ec:	2064      	movs	r0, #100	; 0x64
  80015ee:	f002 fcb3 	bl	8003f58 <LL_mDelay>
 
@@ -2448,7 +2452,7 @@ uint8_t hts221_init(void)
 	}
 
 	//hts221 device init
-	uint8_t ctrl1 = 0b10000011;
+	uint8_t ctrl1 = 0b10000011;//start, set frequency
  8001606:	2383      	movs	r3, #131	; 0x83
  8001608:	717b      	strb	r3, [r7, #5]
 	hts221_write_byte(HTS221_ADDRESS_CTRL1, ctrl1);
@@ -3924,6 +3928,7 @@ float lps25hb_get_press()
  8001f08:	b580      	push	{r7, lr}
  8001f0a:	b082      	sub	sp, #8
  8001f0c:	af00      	add	r7, sp, #0
+	// get pressure [hPa]
 	uint8_t temp[3];
 	lps25hb_readArray(temp, LPS25HB_ADDRESS_PRESS_XL, 3);
  8001f0e:	1d3b      	adds	r3, r7, #4
@@ -3972,7 +3977,7 @@ uint8_t lps25hb_init(void)
  8001f5a:	2301      	movs	r3, #1
  8001f5c:	71fb      	strb	r3, [r7, #7]
 
-	LL_mDelay(100);
+	LL_mDelay(100);//??
  8001f5e:	2064      	movs	r0, #100	; 0x64
  8001f60:	f001 fffa 	bl	8003f58 <LL_mDelay>
 
@@ -4023,7 +4028,7 @@ uint8_t lps25hb_init(void)
 		}
 
 	//lps25hb device init
-	uint8_t ctrl1 = 0b11000000;
+	uint8_t ctrl1 = 0b11000000;//start device, and set freq
  8001f9e:	23c0      	movs	r3, #192	; 0xc0
  8001fa0:	717b      	strb	r3, [r7, #5]
 	lps25hb_write_byte(LPS25HB_ADDRESS_CTRL1, ctrl1);
@@ -4617,7 +4622,7 @@ void SystemClock_Config(void)
 	void writeDisplay(){
  80022fc:	b598      	push	{r3, r4, r7, lr}
  80022fe:	af00      	add	r7, sp, #0
-		static uint8_t compStr[13];
+		static char compStr[13];
 		switch (dataID){
  8002300:	4b44      	ldr	r3, [pc, #272]	; (8002414 <writeDisplay+0x118>)
  8002302:	781b      	ldrb	r3, [r3, #0]
@@ -4753,7 +4758,7 @@ void SystemClock_Config(void)
  8002414:	20000258 	.word	0x20000258
  8002418:	200002a0 	.word	0x200002a0
  800241c:	08007688 	.word	0x08007688
- 8002420:	2000025c 	.word	0x2000025c
+ 8002420:	20000268 	.word	0x20000268
  8002424:	08007694 	.word	0x08007694
  8002428:	080076a0 	.word	0x080076a0
  800242c:	080076ac 	.word	0x080076ac
@@ -4810,6 +4815,7 @@ void SystemClock_Config(void)
  8002484:	70bb      	strb	r3, [r7, #2]
  8002486:	4613      	mov	r3, r2
  8002488:	707b      	strb	r3, [r7, #1]
+		//check edge of the button
 		uint8_t cnt = 0; // counts samples in row
  800248a:	2300      	movs	r3, #0
  800248c:	73fb      	strb	r3, [r7, #15]
@@ -4863,7 +4869,7 @@ void SystemClock_Config(void)
 	void MAIN_updateData(){
  80024d4:	b580      	push	{r7, lr}
  80024d6:	af00      	add	r7, sp, #0
-		static float mag[3];
+
 		lis3mdl_get_mag(mag,(mag+1), (mag+2));
  80024d8:	4b48      	ldr	r3, [pc, #288]	; (80025fc <MAIN_updateData+0x128>)
  80024da:	4a49      	ldr	r2, [pc, #292]	; (8002600 <MAIN_updateData+0x12c>)
@@ -4890,7 +4896,6 @@ void SystemClock_Config(void)
  800251c:	eef0 7a40 	vmov.f32	s15, s0
  8002520:	4b3b      	ldr	r3, [pc, #236]	; (8002610 <MAIN_updateData+0x13c>)
  8002522:	edc3 7a00 	vstr	s15, [r3]
-
 		data[1] = adjustData(hts221_get_temp(),minDataVal[1],maxDataVal[1]);
  8002526:	f7fe ff6d 	bl	8001404 <hts221_get_temp>
  800252a:	eef0 6a40 	vmov.f32	s13, s0
@@ -4960,9 +4965,9 @@ void SystemClock_Config(void)
  80025f6:	bf00      	nop
  80025f8:	bd80      	pop	{r7, pc}
  80025fa:	bf00      	nop
- 80025fc:	20000270 	.word	0x20000270
- 8002600:	20000274 	.word	0x20000274
- 8002604:	2000026c 	.word	0x2000026c
+ 80025fc:	20000260 	.word	0x20000260
+ 8002600:	20000264 	.word	0x20000264
+ 8002604:	2000025c 	.word	0x2000025c
  8002608:	20000038 	.word	0x20000038
  800260c:	2000004c 	.word	0x2000004c
  8002610:	200002a0 	.word	0x200002a0
@@ -4976,6 +4981,8 @@ void SystemClock_Config(void)
  800261a:	ed87 0a03 	vstr	s0, [r7, #12]
  800261e:	edc7 0a02 	vstr	s1, [r7, #8]
  8002622:	ed87 1a01 	vstr	s2, [r7, #4]
+		// saturation of data
+
 		if(value < minValue){
  8002626:	ed97 7a03 	vldr	s14, [r7, #12]
  800262a:	edd7 7a02 	vldr	s15, [r7, #8]
@@ -5016,7 +5023,9 @@ void SystemClock_Config(void)
  800266c:	af00      	add	r7, sp, #0
  800266e:	ed87 0a01 	vstr	s0, [r7, #4]
  8002672:	edc7 0a00 	vstr	s1, [r7]
-		return (float) 90.0f  - (atan2((double)y,(double)x)) * 180.0f/3.1415f;
+		// x, y [gauss] (magnetic induction)
+
+		return (float) 90.0f  + (atan2((double)y,(double)x)) * 180.0f/3.1415f;
  8002676:	6838      	ldr	r0, [r7, #0]
  8002678:	f7fd ff66 	bl	8000548 <__aeabi_f2d>
  800267c:	4604      	mov	r4, r0
@@ -5041,11 +5050,11 @@ void SystemClock_Config(void)
  80026b2:	f7fe f8cb 	bl	800084c <__aeabi_ddiv>
  80026b6:	4603      	mov	r3, r0
  80026b8:	460c      	mov	r4, r1
- 80026ba:	461a      	mov	r2, r3
- 80026bc:	4623      	mov	r3, r4
- 80026be:	f04f 0000 	mov.w	r0, #0
- 80026c2:	490c      	ldr	r1, [pc, #48]	; (80026f4 <calcAzimuth+0x8c>)
- 80026c4:	f7fd fde0 	bl	8000288 <__aeabi_dsub>
+ 80026ba:	4618      	mov	r0, r3
+ 80026bc:	4621      	mov	r1, r4
+ 80026be:	f04f 0200 	mov.w	r2, #0
+ 80026c2:	4b0c      	ldr	r3, [pc, #48]	; (80026f4 <calcAzimuth+0x8c>)
+ 80026c4:	f7fd fde2 	bl	800028c <__adddf3>
  80026c8:	4603      	mov	r3, r0
  80026ca:	460c      	mov	r4, r1
  80026cc:	4618      	mov	r0, r3
@@ -5072,6 +5081,11 @@ void SystemClock_Config(void)
  80026fc:	af00      	add	r7, sp, #0
  80026fe:	ed87 0a01 	vstr	s0, [r7, #4]
  8002702:	edc7 0a00 	vstr	s1, [r7]
+		// temperature [°C]
+		// pressure [hPa]
+
+		// https://keisan.casio.com/has10/SpecExec.cgi?id=system/2006/1224585971
+
 		const float P0 = 1013.25;
  8002706:	4b1e      	ldr	r3, [pc, #120]	; (8002780 <calcAltitude+0x88>)
  8002708:	60fb      	str	r3, [r7, #12]
@@ -5921,8 +5935,8 @@ void SystemInit(void)
  8002bbc:	f85d 7b04 	ldr.w	r7, [sp], #4
  8002bc0:	4770      	bx	lr
  8002bc2:	bf00      	nop
- 8002bc4:	08007740 	.word	0x08007740
- 8002bc8:	0800774c 	.word	0x0800774c
+ 8002bc4:	08007744 	.word	0x08007744
+ 8002bc8:	08007750 	.word	0x08007750
 
 08002bcc <LL_TIM_SetClockSource>:
 {
@@ -9849,11 +9863,11 @@ void LL_SetSystemCoreClock(uint32_t HCLKFrequency)
  8004480:	9306      	str	r3, [sp, #24]
  8004482:	e015      	b.n	80044b0 <_printf_float+0x324>
  8004484:	7fefffff 	.word	0x7fefffff
- 8004488:	08007763 	.word	0x08007763
- 800448c:	0800775f 	.word	0x0800775f
- 8004490:	0800776b 	.word	0x0800776b
- 8004494:	08007767 	.word	0x08007767
- 8004498:	0800776f 	.word	0x0800776f
+ 8004488:	08007767 	.word	0x08007767
+ 800448c:	08007763 	.word	0x08007763
+ 8004490:	0800776f 	.word	0x0800776f
+ 8004494:	0800776b 	.word	0x0800776b
+ 8004498:	08007773 	.word	0x08007773
  800449c:	2301      	movs	r3, #1
  800449e:	9a06      	ldr	r2, [sp, #24]
  80044a0:	4631      	mov	r1, r6
@@ -10333,8 +10347,8 @@ void LL_SetSystemCoreClock(uint32_t HCLKFrequency)
  800490a:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
  800490e:	f104 0542 	add.w	r5, r4, #66	; 0x42
  8004912:	e76c      	b.n	80047ee <_printf_i+0xf6>
- 8004914:	08007771 	.word	0x08007771
- 8004918:	08007782 	.word	0x08007782
+ 8004914:	08007775 	.word	0x08007775
+ 8004918:	08007786 	.word	0x08007786
 
 0800491c <siprintf>:
  800491c:	b40e      	push	{r1, r2, r3}
@@ -10779,11 +10793,11 @@ void LL_SetSystemCoreClock(uint32_t HCLKFrequency)
  8004da8:	509f79fb 	.word	0x509f79fb
  8004dac:	3fd34413 	.word	0x3fd34413
  8004db0:	7ff00000 	.word	0x7ff00000
- 8004db4:	08007770 	.word	0x08007770
+ 8004db4:	08007774 	.word	0x08007774
  8004db8:	3ff80000 	.word	0x3ff80000
  8004dbc:	080078d0 	.word	0x080078d0
  8004dc0:	080078a8 	.word	0x080078a8
- 8004dc4:	0800789d 	.word	0x0800789d
+ 8004dc4:	080078a1 	.word	0x080078a1
  8004dc8:	07f1      	lsls	r1, r6, #31
  8004dca:	d508      	bpl.n	8004dde <_dtoa_r+0x34e>
  8004dcc:	e9dd 0108 	ldrd	r0, r1, [sp, #32]
@@ -11585,8 +11599,8 @@ void LL_SetSystemCoreClock(uint32_t HCLKFrequency)
  80055f0:	f000 f872 	bl	80056d8 <__multadd>
  80055f4:	9004      	str	r0, [sp, #16]
  80055f6:	e7ea      	b.n	80055ce <_dtoa_r+0xb3e>
- 80055f8:	0800776f 	.word	0x0800776f
- 80055fc:	08007894 	.word	0x08007894
+ 80055f8:	08007773 	.word	0x08007773
+ 80055fc:	08007898 	.word	0x08007898
 
 08005600 <_localeconv_r>:
  8005600:	4b04      	ldr	r3, [pc, #16]	; (8005614 <_localeconv_r+0x14>)

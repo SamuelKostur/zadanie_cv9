@@ -14,8 +14,12 @@ uint8_t curPos = 0;
 uint8_t shiftDir = LEFT_TO_RIGHT;
 int8_t decSepPos = -5; //default value meaning there is no decimal point in string
 
+const char segVal_ASCII_start = '-';
 // 0b dABC DEFG
-const uint8_t segVal_ASCII[75]= {
+const uint8_t segVal_ASCII[]= {
+
+/*  -     .     /    */
+	0x01, 0x80, 0x00,
 /*  0     1     2     3     4     5     6     7     8     9     :     ;     */
     0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B, 0x00, 0x00,
 /*  <     =     >     ?     @     A     B     C     D     E     F     G     */
@@ -55,7 +59,7 @@ void DISPLAY_displayCurStr(){
 	static uint8_t curActDig = 0;
 	resetAllDigits();
 
-	updateAlphanumChar( segVal_ASCII[ toupper(curStr[curActDig]) - '0'] );
+	updateAlphanumChar( segVal_ASCII[ toupper(curStr[curActDig]) - segVal_ASCII_start] );
 	updateDecimalPoint(curActDig);
 	setDigit(curActDig);
 	curActDig++;

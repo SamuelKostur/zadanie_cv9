@@ -56,6 +56,7 @@ float minDataVal[] = {-99.9, -99.9, 0, 0, -9999.9};
 float maxDataVal[] = {99.9, 99.9, 99, 9999.99, 9999.9};
 uint8_t dataID = 0;
 uint8_t check[3];
+static float mag[3];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -209,7 +210,6 @@ void SystemClock_Config(void)
 
 	void MAIN_updateData(){
 
-		static float mag[3];
 		lis3mdl_get_mag(mag,(mag+1), (mag+2));
 		data[0] = adjustData(calcAzimuth(mag[0], mag[1]),minDataVal[0],maxDataVal[0]);
 		data[1] = adjustData(hts221_get_temp(),minDataVal[1],maxDataVal[1]);
@@ -236,7 +236,7 @@ void SystemClock_Config(void)
 	float calcAzimuth(float x, float y){
 		// x, y [gauss] (magnetic induction)
 
-		return (float) 90.0f  - (atan2((double)y,(double)x)) * 180.0f/3.1415f;
+		return (float) 90.0f  + (atan2((double)y,(double)x)) * 180.0f/3.1415f;
 	}
 
 	float calcAltitude(float temperature, float pressure){
